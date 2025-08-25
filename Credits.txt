@@ -1,0 +1,4 @@
+House Interior Tileset 32x32 LITE, by Graduation Cat, https://assetstore.unity.com/packages/2d/environments/house-interior-tileset-32x32-lite-307715
+
+NavMeshPlus package
+https://github.com/h8man/NavMeshPlus

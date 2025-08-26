@@ -2,3 +2,6 @@ House Interior Tileset 32x32 LITE, by Graduation Cat, https://assetstore.unity.c
 
 NavMeshPlus package
 https://github.com/h8man/NavMeshPlus
+
+### SOUND EFFECTS ###
+Footsteps In Squeaky Shoes by Navadaux -- https://freesound.org/s/448744/ -- License: Creative Commons 0

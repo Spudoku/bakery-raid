@@ -11,14 +11,18 @@ public class LookAtMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = transform.position.z;
+        if (!LevelManager.isPaused)
+        {
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = transform.position.z;
 
-        Vector2 dir = (mouseWorldPos - transform.position).normalized;
+            Vector2 dir = (mouseWorldPos - transform.position).normalized;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        transform.localRotation = Quaternion.Euler(0, 0, angle);
+            transform.localRotation = Quaternion.Euler(0, 0, angle);
+        }
+
 
     }
 }

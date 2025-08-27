@@ -1,20 +1,36 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public bool isPaused = false;
+    public static bool isPaused = false;
     [SerializeField] GameObject player;
 
     [SerializeField] RandomizedSpawner bettySpawner;
     [SerializeField] private GameObject betty;
     [SerializeField] private BettyAI bettyAI;
 
+    [SerializeField] private RandomizedSpawner recipeSpawner;
+
+    [Header("Sounds")]
+    [SerializeField] AudioSource doorSFXSource;
+
     [Header("UI stuff")]
-    [SerializeField] private GameObject PauseMenu;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject loseMenu;
+    [SerializeField] private GameObject winMenu;
+
+    [Header("Scenes")]
+    [SerializeField] private int mainMenuBuildIndex;
     void Start()
     {
         StartLevel();
-        isPaused = true;
+        isPaused = false;
+        if (doorSFXSource != null)
+        {
+            doorSFXSource.Play();
+        }
+
     }
 
     void Update()
@@ -37,6 +53,7 @@ public class LevelManager : MonoBehaviour
     private void StartLevel()
     {
         InitBetty();
+        InitRecipe();
     }
     private void InitBetty()
     {
@@ -49,6 +66,23 @@ public class LevelManager : MonoBehaviour
         betty = bettySpawner.Spawn();
         bettyAI = betty.GetComponent<BettyAI>();
 
+    }
+
+    private void InitRecipe()
+    {
+        recipeSpawner.Spawn();
+    }
+
+    public static void WinLevel()
+    {
+        Time.timeScale = 0f;
+        // show win UI
+    }
+
+    public static void Lose()
+    {
+        Time.timeScale = 0f;
+        // show game over screen
     }
 
 

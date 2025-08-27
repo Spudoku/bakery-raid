@@ -95,6 +95,10 @@ public class Inventory : MonoBehaviour
         {
             return;
         }
+        if (!activeItem.canBeUsed)
+        {
+            return;
+        }
 
         activeItem.Use();
 

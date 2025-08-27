@@ -22,6 +22,11 @@ public class Door : MonoBehaviour
             if (inventory.IndexOf(recipe) >= 0)
             {
                 LevelManager.WinLevel();
+                Debug.Log($"[Door] {collision} has item {recipe.itemName}");
+            }
+            else
+            {
+                Debug.Log($"[Door] {collision} does NOT have item {recipe.itemName}");
             }
         }
     }

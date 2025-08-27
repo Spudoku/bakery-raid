@@ -12,6 +12,7 @@ public class Item : ScriptableObject
     [Header("Cosmetics")]
     public Sprite sprite;
 
+    public bool canBeUsed = false;
     public bool isConsumable;   // if true, use immediately after being picked up
 
     public virtual void Use()

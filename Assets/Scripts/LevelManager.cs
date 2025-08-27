@@ -1,14 +1,18 @@
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public static bool isPaused = false;
+
+    public static bool gameOver = false;
     [SerializeField] GameObject player;
 
     [SerializeField] RandomizedSpawner bettySpawner;
     [SerializeField] private GameObject betty;
     [SerializeField] private BettyAI bettyAI;
+    [SerializeField] private float gracePeriod = 5f;
 
     [SerializeField] private RandomizedSpawner recipeSpawner;
 
@@ -26,6 +30,10 @@ public class LevelManager : MonoBehaviour
     {
         StartLevel();
         isPaused = false;
+        pauseMenu.SetActive(false);
+        loseMenu.SetActive(false);
+        winMenu.SetActive(false);
+
         if (doorSFXSource != null)
         {
             doorSFXSource.Play();
@@ -35,19 +43,23 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (isPaused)
+        if (isPaused || gameOver)
         {
             Time.timeScale = 0f;
+            AudioListener.pause = true;
+
         }
         else
         {
             Time.timeScale = 1.0f;
+            AudioListener.pause = false;
         }
     }
 
     public void TogglePause()
     {
         isPaused = !isPaused;
+        pauseMenu.SetActive(isPaused);
     }
 
     private void StartLevel()
@@ -65,6 +77,8 @@ public class LevelManager : MonoBehaviour
 
         betty = bettySpawner.Spawn();
         bettyAI = betty.GetComponent<BettyAI>();
+        bettyAI.Stun(gracePeriod);
+        bettyAI.levelManager = this;
 
     }
 
@@ -73,16 +87,32 @@ public class LevelManager : MonoBehaviour
         recipeSpawner.Spawn();
     }
 
-    public static void WinLevel()
+    public void WinLevel()
     {
+        gameOver = true;
         Time.timeScale = 0f;
         // show win UI
+        winMenu.SetActive(true);
     }
 
-    public static void Lose()
+
+
+    public void Lose()
     {
+        gameOver = true;
         Time.timeScale = 0f;
         // show game over screen
+        loseMenu.SetActive(true);
+    }
+
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene(mainMenuBuildIndex);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 

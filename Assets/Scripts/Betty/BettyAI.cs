@@ -55,6 +55,8 @@ public class BettyAI : MonoBehaviour
 
     [SerializeField] private float stunTimer;
 
+    public LevelManager levelManager;
+
     private bool isWalking;
     void Start()
     {
@@ -221,11 +223,14 @@ public class BettyAI : MonoBehaviour
         stunTimer += time;
     }
 
-    void Oter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            LevelManager.Lose();
+            if (levelManager != null)
+            {
+                levelManager.Lose();
+            }
         }
     }
 }

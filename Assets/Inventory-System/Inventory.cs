@@ -18,8 +18,8 @@ public class Inventory : MonoBehaviour
 
     public bool initialized = false;
 
-    [Header("Weapons")]
-    public Transform launchPoint;
+    [Header("Sounds")]
+    public AudioSource addItemSource;
 
     [Header("Debug")]
     [SerializeField] string activeItemName;

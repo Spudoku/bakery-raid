@@ -16,6 +16,9 @@ public class ItemGameObject : MonoBehaviour
     bool isCollected = false;
     SpriteRenderer spriteRenderer;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip[] pickUpClips;
+
     [Header("Highlight near player")]
     [SerializeField] float hightlightRadius = 5f;
     [SerializeField] Material defaultMaterial;
@@ -55,6 +58,12 @@ public class ItemGameObject : MonoBehaviour
         if (!isCollected && inventory != null && inventory.HasCapacityForItem(Item))
         {
             isCollected = true;
+            // RandomSound.PlayClipAtPoint(pickUpClips, transform.position);
+            if (inventory.addItemSource != null)
+            {
+                RandomSound.Play(inventory.addItemSource, pickUpClips);
+            }
+
             Pickup(inventory);
             StartCoroutine(DespawnSequence());
         }

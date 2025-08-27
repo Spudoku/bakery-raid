@@ -8,4 +8,10 @@ public class RandomSound : MonoBehaviour
         source.clip = clip;
         source.Play();
     }
+
+    public static void PlayClipAtPoint(AudioClip[] clips, Vector2 position)
+    {
+        AudioClip clip = clips[Random.Range(0, clips.Length)];
+        AudioSource.PlayClipAtPoint(clip, position);
+    }
 }

@@ -3,9 +3,18 @@ House Interior Tileset 32x32 LITE, by Graduation Cat, https://assetstore.unity.c
 NavMeshPlus package
 https://github.com/h8man/NavMeshPlus
 
-### SOUND EFFECTS ###
+#### SOUND EFFECTS ####
 Footsteps In Squeaky Shoes by Navadaux -- https://freesound.org/s/448744/ -- License: Creative Commons 0
 Witch Laughter/Cackle.wav by tedboothinnit -- https://freesound.org/s/707058/ -- License: Creative Commons 0
 witch (laughing).wav by ZyryTSounds -- https://freesound.org/s/237984/ -- License: Creative Commons 0
 
 CLOCK TICK Far-T002 by JJTaynos -- https://freesound.org/s/733929/ -- License: Creative Commons 0
+Relaxing Indoor Rain by SamsterBirdies -- https://freesound.org/s/686682/ -- License: Creative Commons 0
+
+Rain on wood by SamsterBirdies -- https://freesound.org/s/584267/ -- License: Creative Commons 0
+
+Rustling Paper by HarpyHarpHarp -- https://freesound.org/s/449127/ -- License: Creative Commons 0
+
+#### Fonts ####
+Thaleah
+    https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059

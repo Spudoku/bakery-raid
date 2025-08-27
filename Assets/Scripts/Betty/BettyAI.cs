@@ -1,4 +1,4 @@
-using System;
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,11 +8,13 @@ using UnityEngine.AI;
 public class BettyAI : MonoBehaviour
 {
     // most movement stats will come from Betty's Navmesh Agent
-    [SerializeField] GameObject target;
+    public GameObject target;
 
     [SerializeField] bool isPursuing = false;
     [SerializeField] bool isWandering = false;
     [SerializeField] bool canSeeTarget = false;
+
+    [SerializeField] bool isStunned = false;
     [SerializeField] float sightDistance = 10f;
 
     [SerializeField] LayerMask cantSeeThru;
@@ -25,16 +27,19 @@ public class BettyAI : MonoBehaviour
     [SerializeField] float wanderSearchRadius = 10f;
     [SerializeField] Vector2 wanderPoint;
     [Header("Timers")]
-    [SerializeField] float targetCheckInterval = 2f;
     [SerializeField] float blindChaseInterval = 3f;         // how long Betty can chase target after line of sight is broken
     [SerializeField] float wanderInterval = 10f;            // how long Betty waits without a target (after blindChaseInterval runs out)
                                                             // until she starts wandering
+    [SerializeField] float flourStun = 5f;
 
     [SerializeField] float pursuitSoundTimer;
 
     [Header("Sounds")]
     [SerializeField] private AudioSource footStepSource;
     [SerializeField] private AudioClip[] footStepClips;
+
+    [SerializeField] private AudioSource laughterSource;
+    [SerializeField] private AudioClip[] laughterClips;
 
     // misc components
     NavMeshAgent agent;
@@ -45,6 +50,10 @@ public class BettyAI : MonoBehaviour
     [SerializeField] private float blindChaseTimer;
     [SerializeField] private float wanderWaitTimer;
     [SerializeField] private Vector2 lastKnownPosition;
+
+    [SerializeField] private float laughTimer;
+
+    [SerializeField] private float stunTimer;
 
     private bool isWalking;
     void Start()
@@ -61,9 +70,37 @@ public class BettyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stunTimer > 0)
+        {
+            isStunned = true;
+        }
+        else
+        {
+            isStunned = false;
+        }
         SetSearchingState();
         isWalking = agent.velocity != Vector3.zero;
         animator.SetBool("isWalking", isWalking);
+        if (isPursuing)
+        {
+            if (laughTimer < 0)
+            {
+                laughTimer = Random.Range(minPursueSoundInterval, maxPursueSoundInterval);
+                AudioClip clip = laughterClips[Random.Range(0, laughterClips.Length)];
+                laughterSource.clip = clip;
+                laughTimer += clip.length;
+                laughterSource.Play();
+
+            }
+            else
+            {
+                laughTimer -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            laughTimer = 0f;
+        }
     }
 
 
@@ -88,6 +125,13 @@ public class BettyAI : MonoBehaviour
     // control CanSeeTarget, isPursuing and related timers
     private void SetSearchingState()
     {
+        if (isStunned)
+        {
+            isPursuing = false;
+            isWandering = false;
+            SetTargetDestination(transform.position);
+            return;
+        }
         canSeeTarget = CanSeeTarget();
         if (canSeeTarget)
         {
@@ -171,4 +215,9 @@ public class BettyAI : MonoBehaviour
         RandomSound.Play(footStepSource, footStepClips);
     }
     #endregion
+
+    public void Stun(float time)
+    {
+        stunTimer += time;
+    }
 }

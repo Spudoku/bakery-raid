@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,8 @@ public class BettyAI : MonoBehaviour
     [SerializeField] float sightDistance = 10f;
 
     [SerializeField] LayerMask cantSeeThru;
+    [Header("Wandering")]
+    [SerializeField] float wanderSearchRadius = 10f;
     [Header("Timers")]
     [SerializeField] float targetCheckInterval = 2f;
     [SerializeField] float blindChaseInterval = 3f;         // how long Betty can chase target after line of sight is broken
@@ -77,50 +80,63 @@ public class BettyAI : MonoBehaviour
     private void SetSearchingState()
     {
         canSeeTarget = CanSeeTarget();
-        if (!canSeeTarget)
+        if (canSeeTarget)
         {
-            // if can't see target, search last known location
-            blindChaseTimer -= Time.deltaTime;
-            if (blindChaseTimer > 0)
-            {
-                isPursuing = true;
-            }
-            else
-            {
-                isPursuing = false;
-                wanderWaitTimer = wanderInterval;
-            }
-        }
-        else
-        {
-            isPursuing = true;
             lastKnownPosition = target.transform.position;
-        }
 
-        if (isPursuing)
-        {
-            MoveTowardsTarget(lastKnownPosition);
-
+            wanderWaitTimer = wanderInterval;
+            blindChaseTimer = blindChaseInterval;
+            isPursuing = true;
+            isWandering = false;
+            SetTargetDestination(lastKnownPosition);
         }
         else
         {
-            // wait until wandering
-            wanderWaitTimer -= Time.deltaTime;
-            if (wanderWaitTimer < 0)
+            blindChaseTimer -= Time.deltaTime;
+            if (blindChaseTimer < 0)
             {
-                lastKnownPosition = ChooseWanderPoint(transform.position);
-                wanderWaitTimer = wanderInterval;
+                wanderWaitTimer -= Time.deltaTime;
+                if (wanderWaitTimer < 0)
+                {
+
+
+                }
+                else
+                {
+                    // hold in place until allowed to wander
+                    SetTargetDestination(transform.position);
+                }
+
+
             }
             else
             {
-                lastKnownPosition = transform.position;
+                wanderWaitTimer = wanderInterval;
+                SetTargetDestination(lastKnownPosition);
+                isPursuing = true;
+                isWandering = false;
             }
         }
     }
 
-    private Vector2 ChooseWanderPoint(Vector2 defaultPos)
+    private void SetTargetDestination(Vector2 destination)
     {
-        return defaultPos;
+        agent.SetDestination(destination);
+    }
+
+    private Vector2 ChooseWanderPoint(Vector2 defaultPos, float radius, int tries = 5)
+    {
+
+        Vector2 position = defaultPos;
+        for (int i = 0; i < tries; i++)
+        {
+            Vector2 point = Random.insideUnitCircle * radius;
+            if ()
+            {
+
+            }
+        }
+        return position;
     }
 
     private bool CanSeeTarget()

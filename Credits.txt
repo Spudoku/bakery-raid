@@ -5,3 +5,5 @@ https://github.com/h8man/NavMeshPlus
 
 ### SOUND EFFECTS ###
 Footsteps In Squeaky Shoes by Navadaux -- https://freesound.org/s/448744/ -- License: Creative Commons 0
+Witch Laughter/Cackle.wav by tedboothinnit -- https://freesound.org/s/707058/ -- License: Creative Commons 0
+witch (laughing).wav by ZyryTSounds -- https://freesound.org/s/237984/ -- License: Creative Commons 0

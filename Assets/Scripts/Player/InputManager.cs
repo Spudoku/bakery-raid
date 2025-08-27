@@ -7,6 +7,8 @@ public class InputManager : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction moveInput;
     private InputAction useInput;
+    private InputAction scrollInput;
+
     public static Vector2 Movement;
     public static float MouseScrollInput;
 
@@ -18,6 +20,7 @@ public class InputManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveInput = playerInput.actions["Move"];
         useInput = playerInput.actions["Attack"];
+        scrollInput = playerInput.actions["Scroll"];
     }
 
     // Update is called once per frame
@@ -25,7 +28,7 @@ public class InputManager : MonoBehaviour
     {
         Movement = moveInput.ReadValue<Vector2>();
         // Debug.Log($"[InputManager.Update] mouse scroll input: {MouseScrollInput}");
-
+        MouseScrollInput = scrollInput.ReadValue<float>();
         useWasPressed = useInput.WasPressedThisFrame();
         useWasHeld = useInput.IsPressed();
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,13 +16,21 @@ public class BettyAI : MonoBehaviour
     [SerializeField] float sightDistance = 10f;
 
     [SerializeField] LayerMask cantSeeThru;
+    [Header("Pursuing")]
+    [SerializeField] float minPursueSoundInterval = 3f;
+    [SerializeField] float maxPursueSoundInterval = 10f;
+
+
     [Header("Wandering")]
     [SerializeField] float wanderSearchRadius = 10f;
+    [SerializeField] Vector2 wanderPoint;
     [Header("Timers")]
     [SerializeField] float targetCheckInterval = 2f;
     [SerializeField] float blindChaseInterval = 3f;         // how long Betty can chase target after line of sight is broken
     [SerializeField] float wanderInterval = 10f;            // how long Betty waits without a target (after blindChaseInterval runs out)
                                                             // until she starts wandering
+
+    [SerializeField] float pursuitSoundTimer;
 
     [Header("Sounds")]
     [SerializeField] private AudioSource footStepSource;
@@ -95,14 +104,22 @@ public class BettyAI : MonoBehaviour
             blindChaseTimer -= Time.deltaTime;
             if (blindChaseTimer < 0)
             {
+                isPursuing = false;
                 wanderWaitTimer -= Time.deltaTime;
                 if (wanderWaitTimer < 0)
                 {
+                    if (!isWandering || Vector2.Distance(transform.position, wanderPoint) < 0.25f)
+                    {
+                        wanderPoint = ChooseWanderPoint(transform.position, wanderSearchRadius, 10);
+                    }
+                    isWandering = true;
 
-
+                    SetTargetDestination(wanderPoint);
+                    Debug.DrawLine(transform.position, wanderPoint, Color.green, 2f);
                 }
                 else
                 {
+                    isWandering = false;
                     // hold in place until allowed to wander
                     SetTargetDestination(transform.position);
                 }
@@ -130,10 +147,11 @@ public class BettyAI : MonoBehaviour
         Vector2 position = defaultPos;
         for (int i = 0; i < tries; i++)
         {
-            Vector2 point = Random.insideUnitCircle * radius;
-            if ()
+            Vector2 point = UnityEngine.Random.insideUnitCircle * radius;
+            if (NavMesh.SamplePosition(point, out var hit, radius, NavMesh.AllAreas))
             {
 
+                return point;
             }
         }
         return position;

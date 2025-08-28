@@ -1,4 +1,5 @@
 
+using NavMeshPlus.Extensions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -41,6 +42,13 @@ public class BettyAI : MonoBehaviour
     [SerializeField] private AudioSource laughterSource;
     [SerializeField] private AudioClip[] laughterClips;
 
+    [SerializeField] private AudioSource coughSource;
+    [SerializeField] private AudioClip[] coughClips;
+
+    [SerializeField] private float minCoughInterval = 1f;
+    [SerializeField] private float maxCoughInterval = 2f;
+    private float coughTimer;
+
     // misc components
     NavMeshAgent agent;
     Animator animator;
@@ -54,10 +62,13 @@ public class BettyAI : MonoBehaviour
     [SerializeField] private float laughTimer;
 
     [SerializeField] private float stunTimer;
+    public float flourTimer;
 
     public LevelManager levelManager;
 
     private bool isWalking;
+
+    [SerializeField] private bool hardMode = false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -73,14 +84,32 @@ public class BettyAI : MonoBehaviour
     void Update()
     {
         stunTimer -= Time.deltaTime;
-        if (stunTimer > 0)
+        coughTimer -= Time.deltaTime;
+        flourTimer -= Time.deltaTime;
+        // trigger "Hardmode" if player has the recipe
+        if (levelManager.playerHasRecipe && !hardMode)
+        {
+            HardMode();
+        }
+        if (stunTimer > 0 || flourTimer > 0)
         {
             isStunned = true;
         }
         else
         {
             isStunned = false;
+            coughTimer = minCoughInterval;
         }
+
+        if (flourTimer > 0 && coughTimer < 0)
+        {
+            // play sounds
+            PlayCoughSFX();
+
+        }
+
+
+
         SetSearchingState();
         isWalking = agent.velocity != Vector3.zero;
         animator.SetBool("isWalking", isWalking);
@@ -217,6 +246,14 @@ public class BettyAI : MonoBehaviour
     {
         RandomSound.Play(footStepSource, footStepClips);
     }
+
+    private void PlayCoughSFX()
+    {
+        AudioClip clip = coughClips[Random.Range(0, coughClips.Length)];
+        coughTimer += clip.length + Random.Range(minCoughInterval, maxCoughInterval);
+        coughSource.clip = clip;
+        coughSource.Play();
+    }
     #endregion
 
     public void Stun(float time)
@@ -231,5 +268,14 @@ public class BettyAI : MonoBehaviour
         {
             levelManager?.Lose();
         }
+    }
+
+    // make betty a lot scarier once the player has the recipe
+    private void HardMode()
+    {
+        wanderInterval *= 0.5f;
+        blindChaseInterval *= 1.5f;
+        agent.speed *= 1.25f;
+        hardMode = true;
     }
 }

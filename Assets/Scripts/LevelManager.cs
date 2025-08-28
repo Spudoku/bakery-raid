@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
 
     public static bool gameOver = false;
     [SerializeField] GameObject player;
+    [SerializeField] Item recipe;
+
 
     [SerializeField] RandomizedSpawner bettySpawner;
     [SerializeField] private GameObject betty;
@@ -15,6 +17,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float gracePeriod = 5f;
 
     [SerializeField] private RandomizedSpawner recipeSpawner;
+
+    public bool playerHasRecipe = false;
 
     [Header("Sounds")]
     [SerializeField] AudioSource doorSFXSource;
@@ -55,6 +59,14 @@ public class LevelManager : MonoBehaviour
         {
             Time.timeScale = 1.0f;
             AudioListener.pause = false;
+        }
+        if (player.TryGetComponent<Inventory>(out var inventory) && inventory.IndexOf(recipe) >= 0)
+        {
+            playerHasRecipe = true;
+        }
+        else
+        {
+            playerHasRecipe = false;
         }
     }
 

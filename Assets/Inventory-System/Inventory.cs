@@ -18,6 +18,8 @@ public class Inventory : MonoBehaviour
 
     public bool initialized = false;
 
+    public Transform launchPoint;
+
     [Header("Sounds")]
     public AudioSource addItemSource;
 
@@ -99,8 +101,17 @@ public class Inventory : MonoBehaviour
         {
             return;
         }
+        if (activeItem is Flour flour)
+        {
+            flour.launchPoint = launchPoint;
+            flour.Use();
+        }
+        else
+        {
+            activeItem.Use();
+        }
 
-        activeItem.Use();
+
 
         cooldown = activeItem.useSpeed;
         RemoveItem(activeItem, 1);

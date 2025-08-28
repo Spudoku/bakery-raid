@@ -108,6 +108,7 @@ public class LevelManager : MonoBehaviour
         // show win UI
         winMenu.SetActive(true);
         winSFXSource?.Play();
+        doorSFXSource.Play();
     }
 
 

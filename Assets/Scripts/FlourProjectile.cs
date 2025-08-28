@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
 
 [RequireComponent(typeof(ParticleSystem))]
 [RequireComponent(typeof(AudioSource))]
@@ -41,27 +40,36 @@ public class FlourProjectile : MonoBehaviour
 
     private IEnumerator DespawnSequence()
     {
-        // float timeElapsed = 0f;
+        float timeElapsed = 0f;
         Collider2D collider = GetComponent<Collider2D>();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
-        foreach (Collider2D testCOllider in colliders)
+        while (timeElapsed < lifeTime)
         {
-            if (collider.gameObject.TryGetComponent<BettyAI>(out var bettyAI) && !hasHitBetty)
+            timeElapsed += Time.deltaTime;
+            if (!hasHitBetty)
             {
-                Debug.Log($"[FlourProjectile] hit betty!");
-                hasHitBetty = true;
-                bettyAI.flourTimer += flourTime;
-                break;
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+                foreach (Collider2D testCOllider in colliders)
+                {
+
+
+                    if (testCOllider.gameObject.TryGetComponent<BettyAI>(out var bettyAI) && !hasHitBetty)
+                    {
+                        Debug.Log($"[FlourProjectile] hit betty!");
+                        hasHitBetty = true;
+                        bettyAI.flourTimer += flourTime;
+                        break;
+                    }
+
+                }
             }
+
+            yield return null;
         }
 
-        // while (timeElapsed < lifeTime)
-        // {
-        //     timeElapsed += Time.deltaTime;
-        // }
-        yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }
+
+
 
 
 }

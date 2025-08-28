@@ -992,7 +992,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8f8c071f5fb35344cb5b196a34995303, type: 3}
   m_Resource: {fileID: 8300000, guid: 8f8c071f5fb35344cb5b196a34995303, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
@@ -1258,6 +1258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4996188673785447433, guid: c8dbe6b31bebe3f47ac1a683c40947ec, type: 3}
+      propertyPath: menuMusic
+      value: 
+      objectReference: {fileID: 1894767250}
     - target: {fileID: 4996188673785447433, guid: c8dbe6b31bebe3f47ac1a683c40947ec, type: 3}
       propertyPath: tutorialUI
       value: 

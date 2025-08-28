@@ -94,6 +94,7 @@ public class BettyAI : MonoBehaviour
         if (stunTimer > 0 || flourTimer > 0)
         {
             isStunned = true;
+            laughterSource.Stop();
         }
         else
         {

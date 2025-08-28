@@ -5010,7 +5010,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0.5
-  flourTime: 5
+  flourTime: 8
+  radius: 5
 --- !u!58 &6235637157025015938
 CircleCollider2D:
   m_ObjectHideFlags: 0

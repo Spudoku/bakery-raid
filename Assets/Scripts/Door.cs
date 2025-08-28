@@ -10,6 +10,8 @@ public class Door : MonoBehaviour
     SpriteRenderer spriteRenderer;
     [SerializeField] Material defaultMaterial;
     [SerializeField] Material nearPlayerMaterial;
+    [SerializeField]
+    private LevelManager levelManager;
 
     void Awake()
     {
@@ -21,7 +23,7 @@ public class Door : MonoBehaviour
         {
             if (inventory.IndexOf(recipe) >= 0)
             {
-                LevelManager.WinLevel();
+                levelManager.WinLevel();
                 Debug.Log($"[Door] {collision} has item {recipe.itemName}");
             }
             else

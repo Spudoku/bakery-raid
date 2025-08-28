@@ -72,6 +72,7 @@ public class BettyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        stunTimer -= Time.deltaTime;
         if (stunTimer > 0)
         {
             isStunned = true;
@@ -223,14 +224,12 @@ public class BettyAI : MonoBehaviour
         stunTimer += time;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (levelManager != null)
-            {
-                levelManager.Lose();
-            }
+            levelManager?.Lose();
         }
     }
 }

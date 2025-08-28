@@ -447,7 +447,7 @@ MonoBehaviour:
   sightDistance: 20
   cantSeeThru:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 193
   minPursueSoundInterval: 3
   maxPursueSoundInterval: 10
   wanderSearchRadius: 10
@@ -475,6 +475,7 @@ MonoBehaviour:
   lastKnownPosition: {x: 0, y: 0}
   laughTimer: 0
   stunTimer: 0
+  levelManager: {fileID: 0}
 --- !u!61 &2215994004154833147
 BoxCollider2D:
   m_ObjectHideFlags: 0

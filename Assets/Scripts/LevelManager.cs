@@ -18,6 +18,8 @@ public class LevelManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] AudioSource doorSFXSource;
+    [SerializeField] AudioSource loseSFXSource;
+    [SerializeField] AudioSource winSFXSource;
 
     [Header("UI stuff")]
     [SerializeField] private GameObject pauseMenu;
@@ -93,6 +95,7 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0f;
         // show win UI
         winMenu.SetActive(true);
+        winSFXSource?.Play();
     }
 
 
@@ -103,6 +106,7 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0f;
         // show game over screen
         loseMenu.SetActive(true);
+        loseSFXSource?.Play();
     }
 
     public void QuitToMenu()

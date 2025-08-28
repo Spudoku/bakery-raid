@@ -1,4 +1,5 @@
 House Interior Tileset 32x32 LITE, by Graduation Cat, https://assetstore.unity.com/packages/2d/environments/house-interior-tileset-32x32-lite-307715
+(I only used this asset for inspiration. It is in the source files but none of the tiles are actually used)
 
 NavMeshPlus package
 https://github.com/h8man/NavMeshPlus
@@ -18,6 +19,10 @@ Rustling Paper by HarpyHarpHarp -- https://freesound.org/s/449127/ -- License: C
 Door slam 1.wav by bennstir -- https://freesound.org/s/80928/ -- License: Attribution 4.0
 
 Eerie Music Box with Dark Tones by Universfield -- https://freesound.org/s/785707/ -- License: Attribution 4.0
+
+Game Over 3 by melokacool -- https://freesound.org/s/615457/ -- License: Creative Commons 0
+
+victory.mp3 by Loyalty_Freak_Music -- https://freesound.org/s/407471/ -- License: Creative Commons 0
 
 #### Fonts ####
 Thaleah

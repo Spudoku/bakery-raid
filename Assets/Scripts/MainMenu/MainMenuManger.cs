@@ -11,7 +11,7 @@ public class MainMenuManger : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("[MainMenuManager.Awake] awake called!");
+
 
         tutorialUI.SetActive(false);
 
@@ -19,7 +19,17 @@ public class MainMenuManger : MonoBehaviour
 
     void OnEnable()
     {
-        menuMusic.Play();
+        Debug.Log("[MainMenuManager.OnEnable] awake called!");
+
+    }
+
+    void Update()
+    {
+        if (menuMusic != null && !menuMusic.isPlaying)
+        {
+            menuMusic.Play();
+            Debug.Log("Menu music started playing.");
+        }
     }
 
 

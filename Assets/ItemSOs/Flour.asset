@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flour
   m_EditorClassIdentifier: 
   itemName: Flour
-  useSpeed: 0.1
+  useSpeed: 0.3
   sprite: {fileID: -829110853296471005, guid: 671f5c36e644a91449b96978cd1b709b, type: 3}
   canBeUsed: 1
   isConsumable: 0

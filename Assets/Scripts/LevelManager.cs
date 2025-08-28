@@ -32,10 +32,14 @@ public class LevelManager : MonoBehaviour
 
     [Header("Scenes")]
     [SerializeField] private int mainMenuBuildIndex;
-    void Start()
+
+
+    void OnEnable()
     {
+        Time.timeScale = 1f;
         StartLevel();
         isPaused = false;
+        gameOver = false;
         pauseMenu.SetActive(false);
         loseMenu.SetActive(false);
         winMenu.SetActive(false);
@@ -44,7 +48,7 @@ public class LevelManager : MonoBehaviour
         {
             doorSFXSource.Play();
         }
-
+        Debug.Log("[LevelManager.OnEnable]");
     }
 
     void Update()
@@ -130,6 +134,8 @@ public class LevelManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        OnEnable();
+
     }
 
 

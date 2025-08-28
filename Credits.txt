@@ -6,7 +6,9 @@ https://github.com/h8man/NavMeshPlus
 
 #### SOUND EFFECTS ####
 Footsteps In Squeaky Shoes by Navadaux -- https://freesound.org/s/448744/ -- License: Creative Commons 0
+
 Witch Laughter/Cackle.wav by tedboothinnit -- https://freesound.org/s/707058/ -- License: Creative Commons 0
+
 witch (laughing).wav by ZyryTSounds -- https://freesound.org/s/237984/ -- License: Creative Commons 0
 
 CLOCK TICK Far-T002 by JJTaynos -- https://freesound.org/s/733929/ -- License: Creative Commons 0
@@ -27,6 +29,12 @@ victory.mp3 by Loyalty_Freak_Music -- https://freesound.org/s/407471/ -- License
 Coughs Unprocessed by midwestdocumentary -- https://freesound.org/s/722623/ -- License: Creative Commons 0
 
 Bag Of Flour Dropped On Counter Top.wav by bbrocer -- https://freesound.org/s/382642/ -- License: Creative Commons 0
+
+Success Resolution Video Game Sound Effect Strings.mp3 by FunWithSound -- https://freesound.org/s/456967/ -- License: Creative Commons 0
+
+Water dripping mono clean by xkeril -- https://freesound.org/s/609772/ -- License: Creative Commons 0
+
+Air Conditioner.wav by JonathanTremblay -- https://freesound.org/s/254779/ -- License: Attribution 3.0
 
 #### Fonts ####
 Thaleah
